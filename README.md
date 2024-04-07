@@ -16,7 +16,7 @@
 ### [민웅](./철로/민웅.py)
 
 ```py
-# 13334_철로_railroal
+# 13334_철로_railroad
 import sys
 import heapq
 input = sys.stdin.readline

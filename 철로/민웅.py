@@ -1,4 +1,4 @@
-# 13334_철로_railroal
+# 13334_철로_railroad
 import sys
 import heapq
 input = sys.stdin.readline
