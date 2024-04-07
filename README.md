@@ -16,7 +16,45 @@
 ### [민웅](./철로/민웅.py)
 
 ```py
+# 13334_철로_railroal
+import sys
+import heapq
+input = sys.stdin.readline
 
+N = int(input())
+
+home_office = []
+
+for _ in range(N):
+    h, o = map(int, input().split())
+    home_office.append(sorted([h, o]))
+
+d = int(input())
+
+# O(Nlog(N)) -> 정렬에 소요
+home_office.sort(key=lambda x: x[1])
+ans = 0
+check = []
+cnt = 0
+
+# O(N) * O(log(k)), k는 heapq의 원소 수, -> 최대 N일수 있음
+# 결과적으로 O(Nlog(N))
+for i in range(N):
+    h, o = home_office[i]
+    if o - h > d:
+        continue
+    while check and check[0][0] < (o - d):
+        s, e = heapq.heappop(check)
+        cnt -= 1
+
+    heapq.heappush(check, [h, o])
+    cnt += 1
+    if cnt > ans:
+        ans = cnt
+
+print(ans)
+
+# 최종 시간복잡도 : O(Nlog(N)) + O(Nlog(N)) = O(Nlog(N))
 ```
 
 ### [상미](./철로/상미.py)
@@ -98,7 +136,25 @@ if __name__ == "__main__":
 ### [민웅](./한%20명씩%20제외하기/민웅.py)
 
 ```py
+import sys
+from collections import deque
+input = sys.stdin.readline
 
+N, K = map(int, input().split())
+
+people = deque([i for i in range(1, N+1)])
+
+for i in range(N-K):
+    people.appendleft(people.pop())
+ans = []
+while True:
+    ans.append(people.pop())
+    if not people:
+        break
+    for _ in range(K):
+        people.append(people.popleft())
+
+print(*ans)
 ```
 
 ### [상미](./한%20명씩%20제외하기/상미.py)
